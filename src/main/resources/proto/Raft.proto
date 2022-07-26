@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_package = "com.hamdaankhalid.grpc";
+option java_multiple_files = true;
+
+service RaftService {
+  rpc requestVotes(VoteRequest) returns (VoteResponse) {}
+  rpc leaderSentMessage(Heartbeat) returns (Heartbeat) {}
+}
+
+message Heartbeat {
+  string leaderId = 1;
+}
+
+message VoteRequest {
+  int32 term = 1;
+  string candidateId = 2;
+}
+
+message VoteResponse {
+  int32 term = 1;
+  bool voteGranted = 2;
+}
